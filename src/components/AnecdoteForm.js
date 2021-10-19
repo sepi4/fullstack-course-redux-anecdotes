@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { sortAnecdotes, newAnecdote } from '../reducers/anecdoteReducer';
 
 import { setNotification } from '../reducers/notificationReducer';
 
-function AnecdoteForm() {
+function AnecdoteForm(props) {
     const newAnecdoteInput = useRef(null);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const addNewAnecdote = async (event) => {
         event.preventDefault();
@@ -14,10 +15,13 @@ function AnecdoteForm() {
         newAnecdoteInput.current.value = '';
 
         if (content.length > 0) {
-            dispatch(newAnecdote(content));
-            dispatch(sortAnecdotes());
+            // dispatch(newAnecdote(content));
+            // dispatch(sortAnecdotes());
+            // dispatch(setNotification(`New added: "${content}"`, 3));
 
-            dispatch(setNotification(`New added: "${content}"`, 3));
+            props.newAnecdote(content);
+            props.sortAnecdotes();
+            props.setNotification(`New added: "${content}"`, 3);
         }
     };
 
@@ -34,4 +38,10 @@ function AnecdoteForm() {
     );
 }
 
-export default AnecdoteForm;
+// export default AnecdoteForm;
+
+export default connect(null, {
+    newAnecdote,
+    sortAnecdotes,
+    setNotification,
+})(AnecdoteForm);
