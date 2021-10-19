@@ -6,6 +6,7 @@ const Notification = () => {
         border: 'solid',
         padding: 10,
         borderWidth: 1,
+        margin: '1em',
     };
     if (notification) {
         return <div style={style}>{notification.value}</div>;

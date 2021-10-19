@@ -2,10 +2,7 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { sortAnecdotes, newAnecdote } from '../reducers/anecdoteReducer';
 
-import {
-    setNotification,
-    clearNotification,
-} from '../reducers/notificationReducer';
+import { setNotification } from '../reducers/notificationReducer';
 
 function AnecdoteForm() {
     const newAnecdoteInput = useRef(null);
@@ -15,20 +12,12 @@ function AnecdoteForm() {
         event.preventDefault();
         const content = newAnecdoteInput.current.value.trim();
         newAnecdoteInput.current.value = '';
+
         if (content.length > 0) {
             dispatch(newAnecdote(content));
             dispatch(sortAnecdotes());
 
-            let clearNotificationTimeoutId = setTimeout(() => {
-                dispatch(clearNotification());
-            }, 5000);
-
-            dispatch(
-                setNotification({
-                    value: `New added: "${content}"`,
-                    clearNotificationTimeoutId,
-                })
-            );
+            dispatch(setNotification(`New added: "${content}"`, 3));
         }
     };
 
