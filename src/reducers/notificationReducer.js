@@ -1,3 +1,4 @@
+// action
 export const setNotification = (text, time) => {
     return async (dispatch) => {
         const clearNotificationTimeoutId = setTimeout(() => {
@@ -15,15 +16,14 @@ export const setNotification = (text, time) => {
         });
     };
 };
+// action
 export const clearNotification = () => {
     return {
         type: 'CLEAR_NOTIFICATION',
     };
 };
 
-const initialState = null;
-
-const reducer = (state = initialState, action) => {
+const reducer = (state = null, action) => {
     switch (action.type) {
         case 'SET_NOTIFICATION':
             if (state) {

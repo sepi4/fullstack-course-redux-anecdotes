@@ -1,6 +1,6 @@
 import anecdoteService from '../services/anecdotes';
 
-// action creators
+// action
 export const voteAction = (id) => {
     return async (dispatch) => {
         const anecdote = await anecdoteService.vote(id);
@@ -11,6 +11,7 @@ export const voteAction = (id) => {
         dispatch(sortAnecdotes());
     };
 };
+// action
 export const newAnecdote = (content) => {
     return async (dispatch) => {
         const anecdote = await anecdoteService.createNew(content);
@@ -23,12 +24,15 @@ export const newAnecdote = (content) => {
         dispatch(sortAnecdotes());
     };
 };
+
+// action
 export const sortAnecdotes = () => {
     return {
         type: 'SORT',
     };
 };
 
+// action
 export const initializeAnecdotes = () => {
     return async (dispatch) => {
         const anecdotes = await anecdoteService.getAll();
